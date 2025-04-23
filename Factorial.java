@@ -1,9 +1,24 @@
-public class Factorial{
-    public static void main(String args[]){
-        int n=5, res=1;
-        for(int i=1;i<=5;i++){
-            res*=i;
+import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a non-negative integer: "); 
+
+        int n = scanner.nextInt();
+        
+        if (n < 0) {
+            System.out.println("Factorial is not defined for negative numbers.");
+        } else {
+            long result = factorial(n);
+            System.out.println("Factorial of " + n + " is " + result);
         }
-        System.out.println("Factorial of 5 is "+res);
+        
+        scanner.close();
+    }
+
+    public static long factorial(int n) {
+        if (n == 0 || n == 1) return 1;
+        return n * factorial(n - 1);
     }
 }

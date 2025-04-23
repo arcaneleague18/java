@@ -1,36 +1,37 @@
-
 import java.util.Scanner;
 
-public class Calculator{
-    public static void main(String args[]){
-        int choice,a,b,result;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("a: ");
-        a = sc.nextInt();
-        System.out.println("b: ");
-        b = sc.nextInt();
-
-        System.out.println("Choose: + - * /");
-        choice = sc.nextInt();
-        switch(choice){
-            case 1:
-                result = a+b;
-                System.out.println(result);
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter two numbers: ");
+        double a = scanner.nextDouble();
+        double b = scanner.nextDouble();
+        System.out.print("Enter operation (+, -, *, /): ");
+        char op = scanner.next().charAt(0);
+        scanner.close();
+        double result;
+        switch (op) {
+            case '+':
+                result = a + b;
                 break;
-            case 2:
-                result = a-b;
-                System.out.println(result);
+            case '-':
+                result = a - b;
                 break;
-            case 3:
-                result= a*b;
-                System.out.println(result);
+            case '*':
+                result = a * b;
                 break;
-            case 4:
-                result = a/b;
-                System.out.println(result);
+            case '/':
+                if (b == 0) {
+                    System.out.println("Error: Division by zero");
+                    return;
+                }
+                result = a / b;
                 break;
             default:
-                System.out.println("Enter valid choice.");
+                System.out.println("Invalid operation");
+                return;
         }
+        System.out.printf("%.2f %c %.2f = %.2f%n", a, op, b, result);
+        
     }
 }
