@@ -1,18 +1,25 @@
-symptom = string
-diagnosis = string
-has_symptom(string)
-diagnose(diagnosis)
-start
-% Symptoms
-has_symptom("fever").
-has_symptom("cough").
-has_symptom("runny_nose").
-has_symptom("sore_throat").
-% Diagnosis based on symptoms
-diagnose("flu") :- has_symptom("fever"), has_symptom("cough").
-diagnose("cold") :- has_symptom("runny_nose"), has_symptom("sore_throat").
-% Execution Start
+% Facts: Symptoms the patient has
+has_symptom('fever').
+has_symptom('cough').
+has_symptom('runny_nose').
+has_symptom('sore_throat').
+
+% Rules: Diagnosing based on symptoms
+diagnose('flu') :- 
+    has_symptom('fever'), 
+    has_symptom('cough').
+
+diagnose("cold") :- 
+    has_symptom('runny_nose'), 
+    has_symptom('sore_throat').
+
+% Start execution
 start :-
-write("Checking diagnosis..."), nl,
-( diagnose(D) -> write("Diagnosis: "), write(D), nl;
-write("No matching diagnosis found."), nl ).
+    write('Checking diagnosis...'), nl,
+    ( diagnose(D) ->
+        write('Diagnosis: '), write(D), nl
+    ; 
+        write('No matching diagnosis found.'), nl
+    ).
+
+Query: start.
