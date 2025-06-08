@@ -1,25 +1,23 @@
-% Facts: Symptoms the patient has
-has_symptom('fever').
-has_symptom('cough').
-has_symptom('runny_nose').
-has_symptom('sore_throat').
-
-% Rules: Diagnosing based on symptoms
-diagnose('flu') :- 
-    has_symptom('fever'), 
-    has_symptom('cough').
-
-diagnose("cold") :- 
-    has_symptom('runny_nose'), 
-    has_symptom('sore_throat').
-
-% Start execution
 start :-
-    write('Checking diagnosis...'), nl,
-    ( diagnose(D) ->
-        write('Diagnosis: '), write(D), nl
-    ; 
-        write('No matching diagnosis found.'), nl
-    ).
+    write('enter your symptom 1: '), read(S1),
+    write('enter your symptom 2: '), read(S2),
+    write('enter your symptom 3: '), read(S3),
+    diagnose(S1, S2, S3).
 
-Query: start.
+diagnose(fever, cold, cough) :-
+    write('you may have viral fever').
+
+diagnose(chest_pain, confusion, none) :-
+    write('you may have heart attack').
+
+diagnose(hunger, dizziness, none) :-
+    write('you may have sugar').
+
+diagnose(_, _, _) :-
+    write('no available diseases').
+query:
+?- start.
+enter your symptom 1: fever.
+enter your symptom 2: cold.
+enter your symptom 3: cough.
+you may have viral fever
