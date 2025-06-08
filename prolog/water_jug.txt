@@ -1,0 +1,37 @@
+% Initial and goal state
+start(state(0, 0)).
+goal(state(2, _)).
+
+% Possible moves
+move(state(_, Y), state(4, Y)).         % Fill 4L
+move(state(X, _), state(X, 3)).         % Fill 3L
+move(state(_, Y), state(0, Y)).         % Empty 4L
+move(state(X, _), state(X, 0)).         % Empty 3L
+
+move(state(X, Y), state(NX, NY)) :-     % Pour 4L -> 3L
+    T is X + Y, T =< 3, NX is 0, NY is T.
+move(state(X, Y), state(NX, NY)) :-
+    T is X + Y, T > 3, NX is T - 3, NY is 3.
+
+move(state(X, Y), state(NX, NY)) :-     % Pour 3L -> 4L
+    T is X + Y, T =< 4, NX is T, NY is 0.
+move(state(X, Y), state(NX, NY)) :-
+    T is X + Y, T > 4, NX is 4, NY is T - 4.
+
+% Path finder
+solve :- start(S), goal(G), path(S, G, [S], P), print_path(P).
+
+path(G, G, Visited, Visited).
+path(S, G, Visited, Path) :-
+    move(S, N),
+    \+ member(N, Visited),
+    path(N, G, [N|Visited], Path).
+
+% Print solution
+print_path(P) :-
+    reverse(P, R),
+    forall(member(state(X,Y), R),
+        (write('4L='), write(X), write(', 3L='), write(Y), nl)).
+
+query: solve.
+        

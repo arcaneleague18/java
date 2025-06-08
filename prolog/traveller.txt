@@ -1,0 +1,36 @@
+% Distance facts
+distance(a, b, 10).
+distance(a, c, 15).
+distance(a, d, 20).
+distance(b, c, 35).
+distance(b, d, 25).
+distance(c, d, 30).
+
+% Symmetric path
+path(X, Y, D) :- distance(X, Y, D).
+path(X, Y, D) :- distance(Y, X, D).
+
+% List of all cities
+cities([a, b, c, d]).
+
+% Calculate path cost
+path_cost([_], 0).
+path_cost([A, B | Rest], Cost) :-
+    path(A, B, D),
+    path_cost([B | Rest], RestCost),
+    Cost is D + RestCost.
+
+% Generate tour from Start
+tour(Start, Tour, Cost) :-
+    cities(Cities),
+    delete(Cities, Start, Rest),
+    permutation(Rest, Perm),
+    append([Start | Perm], [Start], Tour),
+    path_cost(Tour, Cost).
+
+% Find best tour
+tsp(Start, BestTour, MinCost) :-
+    findall((Cost, T), tour(Start, T, Cost), AllTours),
+    sort(AllTours, [(MinCost, BestTour) | _]).
+
+query:tsp(a,Tour,Cost).    
