@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Duplicate extends Exception {
     Duplicate(String message) {
         super(message);
@@ -6,8 +8,19 @@ class Duplicate extends Exception {
 
 public class DuplicateException {
     public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 2, 4};
-        
+        Scanner scanner = new Scanner(System.in);
+
+        // Take array size input
+        System.out.print("Enter number of elements: ");
+        int n = scanner.nextInt();
+        int[] numbers = new int[n];
+
+        // Input array elements
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
         try {
             for (int i = 0; i < numbers.length; i++) {
                 for (int j = i + 1; j < numbers.length; j++) {
@@ -20,5 +33,7 @@ public class DuplicateException {
         } catch (Duplicate e) {
             System.out.println(e.getMessage());
         }
+
+        scanner.close();
     }
 }
