@@ -9,7 +9,6 @@ public class Menubar extends JFrame {
         setTitle("Menu Example");
         setSize(300, 200);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setLayout(null);
 
         // Label to show selected item
