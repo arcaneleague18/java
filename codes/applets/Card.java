@@ -7,7 +7,6 @@ public class Card extends JFrame {
         setTitle("CardLayout Example");
         setSize(300, 200);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         // Create CardLayout and card panel
         CardLayout cardLayout = new CardLayout();
